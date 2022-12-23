@@ -1,51 +1,51 @@
+
 #include <iostream>
 #include <string>
-#include "SavingsAccount.h"
+#include "TwitterHeader.h"
+
 using namespace std;
 
-struct myName{
-     string fName;
-     string lName;
-     void operator = (string s){//saying it is void is expedient
-         if (s == ""){
+struct Profile {
+    string userName;
+    int age;
+    string state;
 
-            fName =""; lName="";
-         }
-
-     }// I do not need myName = myName because the default operator = for MyName is sufficent
-
-
+    bool operator == (Profile p2) {
+        if (p2.userName == userName) return true;
+        else return false;
+    }
 };
 
+ostream& operator << (ostream & output, Profile p) {
+    output << p.userName;
+    return output;
+}
 
-int main() {
-	SavingsAccount<string> acct1 (1001, 15);
-	acct1.setOwnerName("Chris");
-	acct1.deposit(200);
+int main()
+{
+    Twitter<string> user1 ("P1");
+    user1.AddFollower("P2");
+    user1.PrintFollowers();
+    user1.AddFollower("P3");
+    user1.PrintFollowers();
+    user1.AddFollower("P4");
+    user1.PrintFollowers();
+    user1.RemoveFollower("P3");
+    user1.PrintFollowers();
 
-	SavingsAccount<string> acct2 (1001, 17);
-	acct2.setOwnerName("Lee");
-	acct2.deposit(100);
-
-	cout << (acct1 + acct2) << endl;
-
-	SavingsAccount<string> acct3 (1001, 25);
-	acct3.setOwnerName("Britton");
-	acct3.deposit(500);
-
-	cout << (acct1 + acct2 + acct3) << endl;    // ((acct1 + acct2) + acct3)
-
-
-    if(acct1 > acct2)
-        cout<< acct1.getOwnerName()<<" has greater balance than "<<acct2.getOwnerName() <<endl;
-    else
-        cout<< acct1.getOwnerName()<<" has lesser balance than "<<acct2.getOwnerName() <<endl;
-
-
-    cout<< acct1 << endl;
-
-    SavingsAccount<myName> zehaoAcct (1001, 31);
-    zehaoAcct.deposit(1000);
+    Profile up; up.userName = "UP1";
+    Twitter<Profile> user2 (up);
+    up.userName = "UP2";
+    user2.AddFollower(up);
+    user2.PrintFollowers();
+    up.userName = "UP3";
+    user2.AddFollower(up);
+    user2.PrintFollowers();
+    up.userName = "UP4";
+    user2.AddFollower(up);
+    user2.PrintFollowers();
+    up.userName = "UP3";
+    user2.RemoveFollower(up);
+    user2.PrintFollowers();
     return 0;
-
 }
