@@ -1,0 +1,51 @@
+#include <iostream>
+#include <string>
+#include "SavingsAccount.h"
+using namespace std;
+
+struct myName{
+     string fName;
+     string lName;
+     void operator = (string s){//saying it is void is expedient
+         if (s == ""){
+
+            fName =""; lName="";
+         }
+
+     }// I do not need myName = myName because the default operator = for MyName is sufficent
+
+
+};
+
+
+int main() {
+	SavingsAccount<string> acct1 (1001, 15);
+	acct1.setOwnerName("Chris");
+	acct1.deposit(200);
+
+	SavingsAccount<string> acct2 (1001, 17);
+	acct2.setOwnerName("Lee");
+	acct2.deposit(100);
+
+	cout << (acct1 + acct2) << endl;
+
+	SavingsAccount<string> acct3 (1001, 25);
+	acct3.setOwnerName("Britton");
+	acct3.deposit(500);
+
+	cout << (acct1 + acct2 + acct3) << endl;    // ((acct1 + acct2) + acct3)
+
+
+    if(acct1 > acct2)
+        cout<< acct1.getOwnerName()<<" has greater balance than "<<acct2.getOwnerName() <<endl;
+    else
+        cout<< acct1.getOwnerName()<<" has lesser balance than "<<acct2.getOwnerName() <<endl;
+
+
+    cout<< acct1 << endl;
+
+    SavingsAccount<myName> zehaoAcct (1001, 31);
+    zehaoAcct.deposit(1000);
+    return 0;
+
+}
